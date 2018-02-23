@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ll</groupId>
+	<artifactId>springboot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>springboot</name>
+	<url>http://maven.apache.org</url>
+	<!-- 这块配置就是Spring Boot父级依赖，有了这个，当前的项目就是Spring Boot项目了，
+	spring-boot-starter-parent是一个特殊的starter,它用来提供相关的Maven默认依赖-->
+	<!-- 使用它之后，常用的包依赖可以省去version标签 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 覆盖默认版本 -->
+		<!-- 使用 java 1.8 -->
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<!-- 这里需要解释下starter模块，简单的说，就是一系列的依赖包组合。例如web starter模块，就是包含了Spring Boot预定义的一些Web开发的常用依赖： -->
+		<!-- 配置依赖 ，web 包含spring-webmvc、spring-web、jackson、validator、tomcat、starter。-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 排除不需要的服务器容器 -->
+			<!-- <exclusions>
+				<exclusion>
+          			<groupId>org.springframework.boot</groupId>
+          			<artifactId>spring-boot-starter-tomcat</artifactId>
+        		</exclusion>
+			</exclusions> -->
+		</dependency>
+		<!-- 依赖需要的服务器容器 -->
+		<!-- <dependency>
+			<groupId>org.springframeword.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency> -->
+		<!-- 单元测试 -->
+	 	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- 项目管理服务 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        
+        <!-- 自己的项目 -->
+        <dependency>
+            <groupId>com.ss</groupId>
+		  	<artifactId>myspringboot</artifactId>
+		  	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
+	</dependencies>
+	<!-- 不继承parent的修改版本依赖方式 -->
+	<!--  
+	<dependencyManagement>
+	    <dependencies>
+	        <dependency>
+	            <groupId>org.springframework.data</groupId>
+	            <artifactId>spring-data-releasetrain</artifactId>
+	            <version>Fowler-SR2</version>
+	            <scope>import</scope>
+	            <type>pom</type>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-dependencies</artifactId>
+	            <version>1.4.0.RELEASE</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>
+	-->
+	<build>
+        <plugins>
+        	<!-- Package as an executable jar 
+        	executable jars 又称 fat jars，是可以直接在生产环境中运行的，包含所有编译生成的class文件以及依赖包。
+        	把项目打包成一个可执行的超级JAR（uber-JAR）,包括把应用程序的所有依赖打入JAR文件内，并为JAR添加一个描述文件，其中的内容能让你用java -jar来运行应用程序。
+        	必须加入下面的插件
+        	-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
